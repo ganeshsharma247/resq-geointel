@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: #07111F;
+  color: #E7EEF6;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0D1B2A; }
+::-webkit-scrollbar-thumb { background: #1B324A; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #274a6b; }
+
+.leaflet-container {
+  background: #0A1626 !important;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.leaflet-popup-content-wrapper {
+  background: #0D1B2A;
+  color: #E7EEF6;
+  border: 1px solid #1B324A;
+  border-radius: 10px;
+}
+.leaflet-popup-tip {
+  background: #0D1B2A;
+}
+.leaflet-control-zoom a {
+  background: #0D1B2A !important;
+  color: #E7EEF6 !important;
+  border-color: #1B324A !important;
+}
+.leaflet-control-attribution {
+  background: rgba(13,27,42,0.8) !important;
+  color: #5E7086 !important;
+}
+.leaflet-control-attribution a { color: #93A6BC !important; }
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+.pulse-dot { animation: pulseDot 1.8s ease-in-out infinite; }
