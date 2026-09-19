@@ -1,151 +1,625 @@
-# RESQ-GeoIntel
+# RESQ-GeoIntel 🚨
 
-**Intelligent Hazard-Based Relocation Decision Support**
-Smart India Hackathon 2026 — Problem Statement **SIH26191** · Team **Datheon**
+### Intelligent Hazard-Based Relocation Decision Support System
 
-RESQ-GeoIntel is an explainable geospatial decision-support platform for disaster-management
-authorities. It carries a hazard all the way through to a routed, capacity-checked relocation
-plan — not just a red map:
+**Smart India Hackathon 2026 · Problem Statement SIH26191 · Team Datheon**
 
+[**🌐 Live Prototype**](https://resq-geointel.vercel.app) · [**💻 Source Code**](https://github.com/ganeshsharma247/resq-geointel)
+
+---
+
+## 🧭 Overview
+
+**RESQ-GeoIntel** is an explainable geospatial decision-support platform designed to help disaster-management authorities identify hazardous habitations, assess vulnerable populations, evaluate safer relocation sites, allocate affected populations across feasible sites, and generate hazard-aware evacuation routes.
+
+Instead of stopping at **hazard mapping**, RESQ-GeoIntel carries the decision workflow from:
+
+```text
+Hazard Identification
+        ↓
+Red-Zone Mapping
+        ↓
+Vulnerable Population Exposure
+        ↓
+Safe Relocation Site Identification
+        ↓
+Site Capacity Validation
+        ↓
+Multi-Site Population Allocation
+        ↓
+Hazard-Aware Routing
+        ↓
+Authority Decision Dashboard
 ```
-Multi-source data → Red-zone mapping → Vulnerable population exposure →
-Safe relocation site identification → Site capacity validation →
-Multi-site population allocation → Hazard-aware routing → Authority decision dashboard
+
+The prototype demonstrates how multiple decision-support stages can be brought together into a single operational interface.
+
+---
+
+## 🎯 Problem Statement
+
+During disasters, identifying a hazardous area is only the first step.
+
+Authorities also need to answer:
+
+* **Which habitations are at risk?**
+* **How many people are exposed?**
+* **Which vulnerable groups require priority attention?**
+* **Where can affected populations be relocated safely?**
+* **Can those locations accommodate the affected population?**
+* **How should people be distributed across multiple sites?**
+* **Which evacuation route minimizes hazard exposure?**
+* **Why was a particular site or route recommended?**
+
+RESQ-GeoIntel addresses these connected decisions through one explainable workflow.
+
+---
+
+## 💡 Proposed Solution
+
+RESQ-GeoIntel combines geospatial risk assessment, population exposure analysis, relocation-site evaluation, capacity checking, population allocation, and hazard-aware routing into a unified decision-support dashboard.
+
+### Core workflow
+
+| Stage                        | What RESQ-GeoIntel does                                   |
+| ---------------------------- | --------------------------------------------------------- |
+| 🔴 **Risk Mapping**          | Identifies and visualizes hazard/red zones                |
+| 👥 **Exposure Analysis**     | Quantifies population and vulnerable groups at risk       |
+| 📍 **Site Assessment**       | Evaluates potential relocation sites                      |
+| 🏕️ **Capacity Engine**      | Checks whether sites can accommodate affected populations |
+| ⚖️ **Allocation**            | Distributes people across multiple feasible sites         |
+| 🛣️ **Routing**              | Generates routes that avoid mapped hazard zones           |
+| 🔎 **Explainability**        | Shows the factors and assumptions behind recommendations  |
+| 📡 **Offline-First Concept** | Demonstrates low-connectivity operational readiness       |
+
+---
+
+# 🚀 Key Features
+
+## 1. 🔴 Automated Red-Zone Mapping
+
+The prototype combines hazard-related indicators into an explainable risk score and visualizes high-risk areas on an interactive map.
+
+Users can inspect individual habitations and understand why an area has been classified as high-risk.
+
+---
+
+## 2. 🔎 Explainable Risk Assessment
+
+Risk recommendations are not presented as a black box.
+
+The dashboard exposes the contributing factors behind a habitation's risk score, helping authorities understand the reasoning behind the recommendation.
+
+---
+
+## 3. 👥 Vulnerable Population Exposure
+
+The system provides exposure information at habitation level, including:
+
+* Total population
+* Households
+* Children
+* Elderly population
+* Other vulnerable groups
+
+This allows evacuation and relocation decisions to consider **who is exposed**, not only **where the hazard exists**.
+
+---
+
+## 4. 📍 Safe-Site Assessment
+
+Candidate relocation sites are evaluated using multiple factors such as:
+
+* Distance from affected habitation
+* Accessibility
+* Hazard exposure
+* Available facilities
+* Road connectivity
+
+This helps identify locations that are more suitable for emergency relocation.
+
+---
+
+## 5. 🏕️ Sphere-Based Capacity Engine
+
+The capacity module evaluates whether a candidate site can accommodate the assigned population using **Sphere-based humanitarian planning constraints** represented in the prototype.
+
+The dashboard makes the capacity assumptions visible instead of treating the capacity value as an unexplained number.
+
+> **Note:** The prototype demonstrates Sphere-based constraints; it does not represent official Sphere certification or compliance.
+
+---
+
+## 6. ⚖️ Multi-Site Population Allocation
+
+Instead of assigning the entire affected population to a single shelter, RESQ-GeoIntel distributes people across multiple feasible relocation sites.
+
+### Example demo allocation
+
+```text
+Affected Population: 6,500
+
+Site Alpha  → 2,000
+Site Beta   → 2,500
+Site Gamma  → 2,000
+
+Total       → 6,500
+Remaining   → 0
 ```
 
-This repo is a working front-end prototype of that workflow, built for the SIH demo.
+The allocation interface also provides a recalculation interaction to demonstrate how the decision-support workflow can be updated against site constraints.
 
-## Features demonstrated
+---
 
-- **Automated Red-Zone Mapping** — terrain + rainfall indicators combined into a weighted, explainable risk score
-- **Explainable Risk Assessment** — click a habitation to see the exact factor breakdown behind its score
-- **Vulnerable Population Exposure** — population, households, children/elderly/other-vulnerable counts per habitation
-- **Safe-Site Assessment** — candidate sites scored on distance, accessibility, hazard exposure, facilities and road connectivity
-- **Sphere-Based Capacity Engine** — site capacity checked against Sphere Handbook humanitarian minimums
-- **Multi-Site Allocation** — affected population distributed across multiple feasible sites, not one shelter
-- **Hazard-Aware Routing** — route avoids mapped hazard zones, with a rejected shortest-path alternative shown for contrast
-- **Evidence & Assumptions** — every recommendation is backed by visible data sources, model weights and assumptions
-- **Offline-First / System Status** — simulated online/offline toggle with cached-layer status, for low-connectivity field use
+## 7. 🛣️ Hazard-Aware Routing
 
-## Tech stack
+The routing module generates a relocation route while considering mapped hazard zones.
 
-- React 19 + Vite
-- Tailwind CSS
-- React Router (hash-based, so it works on static hosts with no server config)
-- React-Leaflet / Leaflet (interactive map, dark CARTO basemap)
-- Recharts (score breakdowns, allocation charts)
-- lucide-react (icons)
+The prototype also displays an alternative shortest-path route that is rejected when it crosses a high-risk area.
 
-All data is a consistent, self-contained mock dataset (`src/data/mockData.js`) representing a
-fictional district — the same habitation, sites and numbers appear across every section, so the
-totals always reconcile (e.g. 2,000 + 2,500 + 2,000 = 6,500 people allocated).
+### Demo example
 
-## Project structure
+```text
+Origin       → H-17
+Destination  → SITE-BETA
 
+Recommended Route
+Distance     → 8.4 km
+Travel Time  → 18 min
+Hazard       → Low
+Status       → Safe
 ```
+
+The system demonstrates that the shortest route is not necessarily the safest route.
+
+---
+
+## 8. 📚 Evidence & Assumptions
+
+RESQ-GeoIntel provides an evidence-oriented section showing:
+
+* Data sources
+* Risk-model factors
+* Model weights
+* Capacity assumptions
+* Decision logic
+* Prototype limitations
+* Human-review considerations
+
+This improves transparency and makes the system's recommendations easier to interpret.
+
+---
+
+## 9. 📡 Offline-First / Low-Connectivity Concept
+
+Disaster-response environments may have unreliable connectivity.
+
+The prototype therefore demonstrates an **offline/online system-status concept** with cached-layer indicators to represent how a production system could continue supporting field operations under limited connectivity.
+
+---
+
+# 🖥️ Dashboard Modules
+
+The prototype contains the following major sections:
+
+```text
+Landing
+   │
+   └── Dashboard
+        ├── Overview
+        ├── Risk Map
+        ├── Exposure
+        ├── Relocation Sites
+        ├── Capacity Engine
+        ├── Allocation
+        ├── Routing
+        ├── Evidence & Assumptions
+        └── System Status
+```
+
+---
+
+# 🧪 Prototype Data
+
+The current website is a **front-end SIH demonstration prototype**.
+
+It uses a consistent, self-contained **fictional/mock dataset** rather than live government or disaster-management data.
+
+The same habitation, relocation sites, risk values, population figures, and allocation values are reused throughout the dashboard so that the numbers remain internally consistent.
+
+For example:
+
+```text
+2,000 + 2,500 + 2,000 = 6,500
+```
+
+This ensures that different dashboard sections demonstrate the same underlying scenario rather than displaying unrelated sample numbers.
+
+### Important
+
+The prototype should **not** be interpreted as a live emergency-response system.
+
+A production implementation would connect the interface to authoritative real-world data sources and backend decision engines.
+
+---
+
+# 🏗️ System Architecture
+
+The current implementation is a frontend prototype designed so that a production backend can be integrated without fundamentally changing the dashboard structure.
+
+### Prototype architecture
+
+```text
+                    ┌───────────────────────┐
+                    │     User / Authority   │
+                    └───────────┬───────────┘
+                                │
+                                ▼
+                    ┌───────────────────────┐
+                    │   RESQ-GeoIntel UI    │
+                    │   React + Vite        │
+                    └───────────┬───────────┘
+                                │
+              ┌─────────────────┼─────────────────┐
+              │                 │                 │
+              ▼                 ▼                 ▼
+        Risk Analysis      Site Assessment     Routing
+              │                 │                 │
+              └─────────────────┼─────────────────┘
+                                │
+                                ▼
+                    ┌───────────────────────┐
+                    │   Decision Dashboard  │
+                    └───────────────────────┘
+```
+
+### Future production architecture
+
+The SIH concept can be extended with:
+
+```text
+Satellite / GIS / Rainfall / Terrain / Population Data
+                         ↓
+                    Data Layer
+                         ↓
+              Geospatial Processing
+                         ↓
+                Risk & Exposure Engine
+                         ↓
+          Site Capacity + Allocation Engine
+                         ↓
+               Hazard-Aware Routing
+                         ↓
+              Authority Dashboard
+```
+
+A possible backend implementation can use technologies such as:
+
+* FastAPI
+* PostgreSQL
+* PostGIS
+* SciPy
+* pgRouting
+* GIS / remote-sensing data sources
+* Government-authoritative datasets
+
+---
+
+# 🛠️ Tech Stack
+
+### Frontend
+
+* **React 19**
+* **Vite**
+* **Tailwind CSS**
+* **React Router**
+* **React-Leaflet**
+* **Leaflet**
+* **Recharts**
+* **Lucide React**
+
+### Mapping
+
+The prototype uses an interactive Leaflet-based map with OpenStreetMap tiles.
+
+### Data
+
+* Self-contained mock dataset
+* Centralized data source in `src/data/mockData.js`
+
+---
+
+# 📁 Project Structure
+
+```text
 resq-geointel/
+│
 ├── src/
-│   ├── components/   # Sidebar, TopBar, MapView, MapLegend, shared UI primitives
-│   ├── sections/      # The 9 dashboard sections (Overview, Risk Map, Exposure, ...)
-│   ├── pages/         # Landing page + Dashboard shell
-│   ├── data/          # mockData.js — single source of truth for all demo numbers
+│   ├── components/
+│   │   ├── Sidebar
+│   │   ├── TopBar
+│   │   ├── MapView
+│   │   └── MapLegend
+│   │
+│   ├── sections/
+│   │   ├── Overview
+│   │   ├── Risk Map
+│   │   ├── Exposure
+│   │   ├── Relocation Sites
+│   │   ├── Capacity Engine
+│   │   ├── Allocation
+│   │   ├── Routing
+│   │   └── Evidence
+│   │
+│   ├── pages/
+│   │   ├── Landing
+│   │   └── Dashboard
+│   │
+│   ├── data/
+│   │   └── mockData.js
+│   │
 │   ├── App.jsx
 │   ├── main.jsx
 │   └── index.css
+│
 ├── index.html
 ├── package.json
 ├── tailwind.config.js
-└── vite.config.js
+├── vite.config.js
+└── README.md
 ```
 
-## Local setup
+---
+
+# 💻 Run Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/ganeshsharma247/resq-geointel.git
+cd resq-geointel
+```
+
+### 2. Install dependencies
 
 ```bash
 npm install
+```
+
+### 3. Start the development server
+
+```bash
 npm run dev
 ```
 
-Open the printed local URL (typically `http://localhost:5173`).
+Open the local URL shown in the terminal, typically:
 
-## Build
+```text
+http://localhost:5173
+```
+
+---
+
+# 🏗️ Production Build
+
+To create the production build:
 
 ```bash
 npm run build
-npm run preview   # serve the production build locally to check it
 ```
 
-The production build is written to `dist/`.
-
-## Uploading to GitHub
+To preview the production build locally:
 
 ```bash
-git init
-git add .
-git commit -m "RESQ-GeoIntel prototype — SIH26191"
-git branch -M main
-git remote add origin https://github.com/<your-username>/resq-geointel.git
-git push -u origin main
+npm run preview
 ```
 
-## Deploying to get a public URL
+The generated production files are written to:
 
-### Option A — Vercel (recommended)
-
-1. Push the repo to GitHub (above).
-2. Go to [vercel.com](https://vercel.com), sign in, click **Add New → Project**, and import the repo.
-3. Vercel auto-detects Vite: build command `npm run build`, output directory `dist`. Click **Deploy**.
-4. You'll get a URL like `https://resq-geointel.vercel.app`. Any future push to `main` redeploys automatically.
-
-Or from the CLI:
-
-```bash
-npm install -g vercel
-vercel        # first deploy, follow the prompts
-vercel --prod # promote to production URL
+```text
+dist/
 ```
 
-### Option B — GitHub Pages
+---
 
-1. `vite.config.js` already sets `base: './'`, so the build uses relative asset paths (works on Pages out of the box).
-2. Build and push the `dist/` folder to a `gh-pages` branch, e.g. using the `gh-pages` package:
-   ```bash
-   npm install -D gh-pages
-   npx gh-pages -d dist
-   ```
-3. In the repo's **Settings → Pages**, set the source to the `gh-pages` branch. Your URL will be
-   `https://<your-username>.github.io/resq-geointel/`.
+# 🌐 Live Deployment
 
-## Updating the site later
+The current prototype is deployed using Vercel.
 
-Make changes locally, then:
+### Live Prototype
 
-```bash
-git add .
-git commit -m "Describe the change"
-git push
+**https://resq-geointel.vercel.app**
+
+### Source Code
+
+**https://github.com/ganeshsharma247/resq-geointel**
+
+Future updates pushed to the main GitHub branch can be deployed through the connected deployment workflow.
+
+---
+
+# 🎬 SIH Demo Flow
+
+For a **2–4 minute demonstration**, the recommended flow is:
+
+### 1. Landing
+
+Introduce the problem and launch the decision dashboard.
+
+### 2. Overview
+
+Show the priority alert for the affected habitation.
+
+### 3. Risk Map
+
+Demonstrate the hazard zone and explain the risk-score breakdown.
+
+### 4. Exposure
+
+Show the number of affected people and vulnerable groups.
+
+### 5. Relocation Sites
+
+Compare the available candidate relocation sites.
+
+### 6. Capacity Engine
+
+Show whether each site has sufficient capacity based on the prototype's planning constraints.
+
+### 7. Allocation
+
+Demonstrate the multi-site allocation:
+
+```text
+2,000 → Site Alpha
+2,500 → Site Beta
+2,000 → Site Gamma
 ```
 
-Vercel redeploys automatically on push. For GitHub Pages, rerun `npx gh-pages -d dist` after
-building.
+### 8. Routing
 
-## Demo flow for judges (2–4 minutes)
+Generate the recommended route and compare it with the rejected hazardous shortest-path alternative.
 
-1. **Landing** — explain the workflow, click "Launch Decision Dashboard"
-2. **Overview** — point at the priority alert for H-17, click "Analyse"
-3. **Risk Map** — show the risk score breakdown and "why is this high-risk" explanation
-4. **Exposure** — show population, households, vulnerable groups
-5. **Relocation Sites** — compare Site Alpha / Beta / Gamma cards
-6. **Capacity Engine** — show Sphere-based capacity sufficiency per site
-7. **Allocation** — show the 2,000 / 2,500 / 2,000 multi-site split, click "Recalculate Allocation"
-8. **Routing** — click "Generate Route", show the hazard-avoiding path vs. the rejected shortest path
-9. **Evidence & Assumptions** — walk through data sources, risk model weights, and the human-review disclaimer
-10. **System Status** — toggle offline mode to show the cached, low-connectivity concept
+### 9. Evidence & Assumptions
 
-## Note
+Explain the data sources, model factors and assumptions.
 
-This is a hackathon front-end prototype with realistic mock data. It is designed so a real
-backend (FastAPI + PostGIS + SciPy + pgRouting, as described in the SIH submission) can be
-connected later without restructuring the front end — see `src/data/mockData.js` as the shape
-each service response would eventually replace.
+### 10. System Status
 
-*AI / model output is decision support and must be reviewed by authorised officials.*
+Demonstrate the offline/online concept for low-connectivity environments.
+
+---
+
+# 🔮 Future Scope
+
+RESQ-GeoIntel can be extended from a demonstration prototype into a production-grade disaster-management decision-support platform.
+
+### Real-Time Data Integration
+
+Integration with authoritative sources for:
+
+* Rainfall
+* Terrain/elevation
+* Flood and landslide information
+* Population data
+* Road networks
+* Weather conditions
+* Disaster alerts
+* Satellite imagery
+
+### Advanced Risk Modelling
+
+Future versions can incorporate:
+
+* Machine-learning-based hazard prediction
+* Dynamic risk scores
+* Temporal hazard modelling
+* Satellite-image analysis
+* Multi-hazard assessment
+
+### Production Optimization
+
+The allocation and routing engines can be connected to:
+
+* Constraint optimization
+* Real road-network graphs
+* pgRouting
+* Dynamic traffic information
+* Shelter occupancy updates
+
+### Mobile / Field Deployment
+
+A dedicated field application could support:
+
+* GPS-based navigation
+* Offline maps
+* Cached emergency data
+* Field-worker updates
+* Shelter occupancy updates
+* Emergency communication
+
+### Authority Integration
+
+The system could eventually integrate with existing disaster-management workflows and authorized government systems.
+
+---
+
+# ⚠️ Prototype Limitations
+
+This repository represents a **working SIH front-end prototype**, not a production emergency-response platform.
+
+Current limitations include:
+
+* Demo/mock geospatial data
+* Simulated risk calculations
+* Prototype capacity calculations
+* Prototype allocation logic
+* Demonstration routing logic
+* Simulated offline status
+* No live government-data integration
+* No real-time emergency alert infrastructure
+
+These components are structured so that production backend services and authoritative datasets can be integrated in future versions.
+
+---
+
+# 🔐 Data & Safety Note
+
+RESQ-GeoIntel is intended to demonstrate a **decision-support workflow**.
+
+For real-world deployment:
+
+* Recommendations should be validated by authorized disaster-management personnel.
+* Data sources should be authoritative and regularly updated.
+* Risk classifications should not replace professional emergency assessment.
+* Population and location data should be handled according to applicable privacy and security requirements.
+
+---
+
+# 👥 Team
+
+### Team Datheon
+
+**Smart India Hackathon 2026**
+
+**Problem Statement:** SIH26191
+
+**Project:** RESQ-GeoIntel
+
+---
+
+# 📌 Project Status
+
+```text
+Frontend Prototype       ✅ Complete
+Interactive Dashboard    ✅ Complete
+Risk Visualization       ✅ Complete
+Exposure Analysis        ✅ Complete
+Site Assessment          ✅ Complete
+Capacity Engine          ✅ Complete
+Multi-Site Allocation    ✅ Complete
+Hazard-Aware Routing     ✅ Complete
+Evidence Section         ✅ Complete
+Offline Concept          ✅ Demonstrated
+GitHub Repository        ✅ Public
+Live Deployment          ✅ Active
+Production Backend       🔄 Future Scope
+Real-Time Data           🔄 Future Scope
+```
+
+---
+
+## 🌐 Links
+
+**Live Prototype:**
+https://resq-geointel.vercel.app
+
+**GitHub Repository:**
+https://github.com/ganeshsharma247/resq-geointel
+
+---
+
+### Built for Smart India Hackathon 2026
+
+**RESQ-GeoIntel — From Hazard Identification to Safer Relocation Decisions.**
+
