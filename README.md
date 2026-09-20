@@ -18,7 +18,7 @@ RESQ-GeoIntel connects these decisions into a **single, continuous geospatial de
 
 > **Risk → Exposure → Relocation → Capacity → Allocation → Routing**
 
-The platform is designed around **decision continuity and explainability over black-box automation**. Major recommendations are supported by visible factors, assumptions, constraints, and decision logic.
+The platform is designed around **decision continuity and explainability over black-box automation**. Major recommendations are supported by visible factors, assumptions, constraints, and decision logic..
 
 ---
 
