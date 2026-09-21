@@ -39,7 +39,7 @@ Operational authorities must answer a connected set of questions:
 
 These decisions are often handled as separate analytical tasks.
 
-### RESQ-GeoIntel addresses this gap by connecting them into one decision pipeline.
+### RESQ-GeoIntel addresses this gap by connecting them into one decision pipeline..
 
 ---
 
